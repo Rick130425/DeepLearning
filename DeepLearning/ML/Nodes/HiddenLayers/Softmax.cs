@@ -39,7 +39,7 @@ public class Softmax : HiddenLayer
     /// <returns>Valores de activación Softmax.</returns>
     protected override double[,] ActivFunc(double[,] preActivation, bool trainingMode)
     {
-        var size = new int[] { preActivation.GetLength(0), preActivation.GetLength(1) };
+        var size = new[] { preActivation.GetLength(0), preActivation.GetLength(1) };
         var softmax = new double[size[0], size[1]];
         for (int i = 0; i < size[0]; i++)
         {

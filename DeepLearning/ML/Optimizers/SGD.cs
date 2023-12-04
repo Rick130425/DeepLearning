@@ -15,7 +15,7 @@ public class SGD : Optimizer
     /// Constructor del optimizador (Descenso de Gradiente Estocástico)
     /// </summary>
     /// <param name="learningRate">Tasa de aprendizaje</param>
-    public SGD(double learningRate)
+    public SGD(double learningRate = 0.01)
     {
         LearningRate = learningRate;
     }

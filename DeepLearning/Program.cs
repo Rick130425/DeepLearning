@@ -5,8 +5,8 @@ using DeepLearning.ML.Optimizers;
 
 var neuralNetwork = new ML(4, new MeanSquaredError());
 
-neuralNetwork.AddLayer(new ReLU(4, new SGD(0.01)));
-neuralNetwork.AddLayer(new ReLU(1, new SGD(0.01)));
+neuralNetwork.AddLayer(new ReLU(4, new Adam()));
+neuralNetwork.AddLayer(new Sigmoid(1, new Adam()));
 
 var data = new double[16][][];
 for (var a = 0; a < 2; a++)
@@ -30,6 +30,6 @@ for (var a = 0; a < 2; a++)
 
 Console.WriteLine("Loss before training: " + neuralNetwork.AverageLoss(data));
 
-neuralNetwork.Train(data, 4, 10000);
+neuralNetwork.Train(data, 16, 1000000);
 
 Console.WriteLine("Loss after training: " + neuralNetwork.AverageLoss(data));
