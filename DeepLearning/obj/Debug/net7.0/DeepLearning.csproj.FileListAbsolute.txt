@@ -12,3 +12,12 @@ C:\Users\ricar\OneDrive\Escritorio\Programming\C#\DeepLearning\DeepLearning\obj\
 C:\Users\ricar\OneDrive\Escritorio\Programming\C#\DeepLearning\DeepLearning\obj\Debug\net7.0\DeepLearning.pdb
 C:\Users\ricar\OneDrive\Escritorio\Programming\C#\DeepLearning\DeepLearning\obj\Debug\net7.0\DeepLearning.genruntimeconfig.cache
 C:\Users\ricar\OneDrive\Escritorio\Programming\C#\DeepLearning\DeepLearning\obj\Debug\net7.0\ref\DeepLearning.dll
+C:\Users\ricar\OneDrive\Escritorio\Programming\C#\DeepLearning\DeepLearning\bin\Debug\net7.0\ClosedXML.dll
+C:\Users\ricar\OneDrive\Escritorio\Programming\C#\DeepLearning\DeepLearning\bin\Debug\net7.0\DocumentFormat.OpenXml.dll
+C:\Users\ricar\OneDrive\Escritorio\Programming\C#\DeepLearning\DeepLearning\bin\Debug\net7.0\ExcelNumberFormat.dll
+C:\Users\ricar\OneDrive\Escritorio\Programming\C#\DeepLearning\DeepLearning\bin\Debug\net7.0\Irony.dll
+C:\Users\ricar\OneDrive\Escritorio\Programming\C#\DeepLearning\DeepLearning\bin\Debug\net7.0\SixLabors.Fonts.dll
+C:\Users\ricar\OneDrive\Escritorio\Programming\C#\DeepLearning\DeepLearning\bin\Debug\net7.0\System.IO.Packaging.dll
+C:\Users\ricar\OneDrive\Escritorio\Programming\C#\DeepLearning\DeepLearning\bin\Debug\net7.0\XLParser.dll
+C:\Users\ricar\OneDrive\Escritorio\Programming\C#\DeepLearning\DeepLearning\obj\Debug\net7.0\DeepLearning.csproj.AssemblyReference.cache
+C:\Users\ricar\OneDrive\Escritorio\Programming\C#\DeepLearning\DeepLearning\obj\Debug\net7.0\DeepLearning.csproj.CopyComplete

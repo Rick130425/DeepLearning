@@ -40,16 +40,16 @@ namespace DeepLearning.ML.Nodes.HiddenLayers
             // Aplica Dropout solo durante el entrenamiento
             if (trainingMode)
             {
-                var size = preActivation.GetLength(1);
-                _dropoutMask = new bool[size];
-                for (var i = 0; i < size; i++)
+                var size = new int[]{ preActivation.GetLength(0), preActivation.GetLength(1) };
+                _dropoutMask = new bool[size[1]];
+                for (var i = 0; i < size[1]; i++)
                 {
                     // Determina aleatoriamente si el nodo se "apaga"
                     _dropoutMask[i] = _random.NextDouble() > _dropoutRate;
                     if (_dropoutMask[i])
                     {
                         // Aplica el efecto de Dropout a los nodos activos
-                        for (var j = 0; j < preActivation.GetLength(0); j++)
+                        for (var j = 0; j < size[0]; j++)
                         {
                             preActivation[j, i] *= _dropoutMask[i] ? 1.0 : 0.0;
                         }
@@ -69,12 +69,12 @@ namespace DeepLearning.ML.Nodes.HiddenLayers
         {
             var size = new[]{ preActivation.GetLength(0), preActivation.GetLength(1) };
             // Aplica la máscara de Dropout a la derivada
-            for (var i = 0; i < size[0]; i++)
+            for (var i = 0; i < size[1]; i++)
             {
                 if (!_dropoutMask[i])
                 {
                     // "Apaga" los nodos que fueron desactivados durante la activación
-                    for (var j = 0; j < size[1]; j++)
+                    for (var j = 0; j < size[0]; j++)
                     {
                         preActivation[j, i] = 0.0;
                     }

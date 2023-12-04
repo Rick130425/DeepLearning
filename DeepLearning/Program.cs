@@ -2,34 +2,22 @@
 using DeepLearning.ML.LossFunctions;
 using DeepLearning.ML.Nodes.HiddenLayers;
 using DeepLearning.ML.Optimizers;
+using static DeepLearning.ML.MLOperations;
 
-var neuralNetwork = new ML(4, new MeanSquaredError());
+var neuralNetwork = new ML(3, new MeanSquaredError());
 
+neuralNetwork.AddLayer(new ReLU(8, new Adam()));
 neuralNetwork.AddLayer(new ReLU(4, new Adam()));
-neuralNetwork.AddLayer(new Sigmoid(1, new Adam()));
+neuralNetwork.AddLayer(new ReLU(1, new Adam()));
 
-var data = new double[16][][];
-for (var a = 0; a < 2; a++)
-{
-    for (var b = 0; b < 2; b++)
-    {
-        for (var c = 0; c < 2; c++)
-        {
-            for (var d = 0; d < 2; d++)
-            {
-                var row = (int)(a + 2 * b + Math.Pow(2, 2) * c + Math.Pow(2, 3) * d);
-                data[row] = new[]
-                {
-                    new double[] { a, b, c, d },
-                    new double[] { ((a & b) | (c & d)) & ((a == 1 ? 0 : 1) | d) & c & b }
-                };
-            }
-        }
-    }
-}
+var data = ReadNumericDataFromCsv("./Datasets/housing.csv", new[] { 0, 2 }, new[] {3, 3}, 
+    hasHeaders: true);
 
 Console.WriteLine("Loss before training: " + neuralNetwork.AverageLoss(data));
 
-neuralNetwork.Train(data, 16, 1000000);
+for (var i = 0; i < 100; i++)
+{
+    neuralNetwork.Train(data, 8, 1);
 
-Console.WriteLine("Loss after training: " + neuralNetwork.AverageLoss(data));
+    Console.WriteLine($"Loss after training ({i}): " + neuralNetwork.AverageLoss(data));
+}
