@@ -24,13 +24,17 @@ public class Adam : Optimizer
     private double[] _vBias; 
     // Contador de iteraciones
     private int _t; 
+    // Agrega un nuevo miembro para el Weight Decay
+    private double _weightDecay;
 
-    public Adam(double learningRate = 0.001, double beta1 = 0.9, double beta2 = 0.999, double epsilon = 1e-8)
+    // Modifica el constructor para aceptar el Weight Decay como un parámetro
+    public Adam(double learningRate = 0.001, double beta1 = 0.9, double beta2 = 0.999, double epsilon = 1e-8, double weightDecay = 0.01)
     {
         _learningRate = learningRate;
         _beta1 = beta1;
         _beta2 = beta2;
         _epsilon = epsilon;
+        _weightDecay = weightDecay; // Inicializa el Weight Decay
         _t = 0;
     }
         
@@ -62,6 +66,9 @@ public class Adam : Optimizer
                 // Corrige los momentos para sesgo inicial
                 var mCorrected = _m[i, j] / (1 - Math.Pow(_beta1, _t));
                 var vCorrected = _v[i, j] / (1 - Math.Pow(_beta2, _t));
+                
+                // Aplica el Weight Decay antes de actualizar los gradientes de los pesos
+                weightsGradients[i, j] += _weightDecay * weightsGradients[i, j];
 
                 // Actualiza los gradientes de los pesos
                 weightsGradients[i, j] -= _learningRate * mCorrected / (Math.Sqrt(vCorrected) + _epsilon);
