@@ -16,8 +16,8 @@ public class ReLU : HiddenLayer
             base.NumInputs = value;
             // Se inicializa un generador de números aleatorios
             var random = new Random();
-            // Se establecen los límites de generación de los números
-            var limit = Math.Sqrt(2.0 / NumInputs);
+            // Se establecen los límites de generación de los números (inicialización de He)
+            var limit = Math.Sqrt(6.0 / NumInputs);
             
             // Y se llena la matriz de pesos con valores aleatorios dentro del límite de generación
             Weights = ApplyFunc(x => random.NextDouble() * 2 * limit - limit, Weights);
