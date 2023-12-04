@@ -70,11 +70,13 @@ public class ML
     /// Propaga un batch de entrada a través de la red neuronal.
     /// </summary>
     /// <param name="inputs">Batch de entrada.</param>
+    /// <param name="trainingMode">Indica si se está en modo de entrenamiento.</param>
     /// <returns>Batch de salida.</returns>
-    public double[,] ForwardPropagation(double[,] inputs)
+    public double[,] ForwardPropagation(double[,] inputs, bool trainingMode)
     {
         // Propaga el batch por todas las capas ocultas, siendo la salida de una capa la entrada de la siguiente
-        return _hiddenLayers.Aggregate(inputs, (current, layer) => layer.ForwardPropagation(current));
+        return _hiddenLayers.Aggregate(inputs, (current, layer) => 
+            layer.ForwardPropagation(current, trainingMode));
     }
     
     /// <summary>
@@ -119,9 +121,9 @@ public class ML
             for (var j = 0; j < numBatches; j++)
             {
                 // Se calculan sus valores de salida
-                var outputValues = ForwardPropagation(batches[j][0]);
+                var outputValues = ForwardPropagation(batches[j][0], true);
                 // Se calcula su error de predicción
-                lossPerEpoch[i] += Loss.CalcLoss(outputValues, batches[j][1]);
+                lossPerEpoch[i] += Loss.CalcLoss(ForwardPropagation(batches[j][0], false), batches[j][1]);
                 // Y se propaga el error a través de la red neuronal
                 BackPropagation(Loss.DerivLoss(outputValues, batches[j][1]));
             }
@@ -151,7 +153,7 @@ public class ML
         for (var j = 0; j < numBatches; j++)
         {
             // Se calculan los valores de salida
-            var outputValues = ForwardPropagation(batches[j][0]);
+            var outputValues = ForwardPropagation(batches[j][0], false);
             // Se calcula el error de predicción
             loss += Loss.CalcLoss(outputValues, batches[j][1]);
         }

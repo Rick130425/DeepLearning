@@ -37,8 +37,9 @@ public class ReLU : HiddenLayer
     /// Función de activación.
     /// </summary>
     /// <param name="preActivation">Valores de entrada.</param>
+    /// <param name="trainingMode">No usada en esta función.</param>
     /// <returns>Valor de salida.</returns>
-    protected override double[,] ActivFunc(double[,] preActivation)
+    protected override double[,] ActivFunc(double[,] preActivation, bool trainingMode)
     {
         // Si x es menor a 0, regresa 0, si no x
         return ApplyFunc(x => x < 0 ? 0 : x, preActivation);

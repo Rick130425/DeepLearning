@@ -55,7 +55,7 @@ public abstract class HiddenLayer
     /// </summary>
     /// <param name="preActivation">Valores de entrada.</param>
     /// <returns>Valor de salida.</returns>
-    protected abstract double[,] ActivFunc(double[,] preActivation);
+    protected abstract double[,] ActivFunc(double[,] preActivation, bool trainingMode);
     
     /// <summary>
     /// Derivada de la función de activación.
@@ -82,15 +82,16 @@ public abstract class HiddenLayer
         }
         
         // Se regresa 
-        return AverageAlongDimension(ForwardPropagation(layerInputs), 0);
+        return AverageAlongDimension(ForwardPropagation(layerInputs, false), 0);
     }
     
     /// <summary>
     /// Propaga la señal entrante hacia adelante.
     /// </summary>
     /// <param name="layerInputs">Valores de entrada (batch).</param>
+    /// <param name="trainingMode">Indica si se está en modo de entrenamiento.</param>
     /// <returns>Valores de salida.</returns>
-    public double[,] ForwardPropagation(double[,] layerInputs)
+    public double[,] ForwardPropagation(double[,] layerInputs, bool trainingMode)
     {
         // Se guardan los valores de entrada para posterior optimización.
         _layerInputs = layerInputs;
@@ -111,7 +112,7 @@ public abstract class HiddenLayer
         }
         
         // Se regresa la matriz resultante de la activación de los nodos
-        return ActivFunc(_preActivation);
+        return ActivFunc(_preActivation, trainingMode);
     }
     
     /// <summary>
